@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            video {
+                width: 400px;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="get-display-media">getDisplayMedia</button>
+        <button id="get-user-media">getUserMedia</button>
+        <video autoplay id="screen"></video>
+        <script>
+            document.querySelector(
+                "button#get-display-media"
+            ).onclick = async () => {
+                const stream = await navigator.mediaDevices.getDisplayMedia();
+                console.log("stream", stream);
+                document.querySelector("video").srcObject = stream;
+            };
+            document.querySelector(
+                "button#get-user-media"
+            ).onclick = async () => {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        mediaSource: "screen",
+                    },
+                });
+                console.log("stream", stream);
+                document.querySelector("video").srcObject = stream;
+            };
+        </script>
+    </body>
+</html>
